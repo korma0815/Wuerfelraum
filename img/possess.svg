@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Ebene_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 192.3 192.3" style="enable-background:new 0 0 192.3 192.3;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:url(#SVGID_1_);}
+	.st1{fill:url(#SVGID_2_);}
+</style>
+<g>
+	<radialGradient id="SVGID_1_" cx="97.565" cy="96.16" r="86.0175" gradientUnits="userSpaceOnUse">
+		<stop  offset="0.5275" style="stop-color:#A38F6C"/>
+		<stop  offset="0.7225" style="stop-color:#A38F6C"/>
+		<stop  offset="0.9825" style="stop-color:#887046"/>
+	</radialGradient>
+	<path class="st0" d="M161.1,32.6c-9.8-9.8-21.8-17.3-35.2-21.8l-15.6,24.6c12,2.5,22.7,8.5,31.1,16.8c8.9,8.9,15.1,20.6,17.3,33.6
+		l24.9-15.8C179.3,55.8,171.4,43,161.1,32.6z M71.6,10.1C57.2,14.5,44.4,22.3,34,32.6c-9.8,9.8-17.3,21.8-21.8,35.2l24.6,15.6
+		c2.5-12,8.5-22.8,16.8-31.1c8.9-8.9,20.6-15.2,33.6-17.3L71.6,10.1z M53.7,140c-8.9-8.9-15.2-20.6-17.3-33.6l-24.9,15.8
+		c4.3,14.4,12.2,27.2,22.5,37.6c9.8,9.8,21.8,17.3,35.2,21.8l15.6-24.6C72.8,154.3,62.1,148.3,53.7,140z M158.2,108.9
+		c-2.5,12-8.5,22.8-16.8,31.1c-8.9,8.9-20.6,15.2-33.6,17.3l15.8,24.9c14.4-4.3,27.2-12.2,37.5-22.5c9.8-9.8,17.3-21.8,21.8-35.2
+		L158.2,108.9z"/>
+	<radialGradient id="SVGID_2_" cx="96.165" cy="96.16" r="96.1625" gradientUnits="userSpaceOnUse">
+		<stop  offset="0.6375" style="stop-color:#836A3E"/>
+		<stop  offset="0.8475" style="stop-color:#836A3E"/>
+	</radialGradient>
+	<path class="st1" d="M117.5,183.8L101.2,158l-5-7.9l-4.9,7.7l-16.1,25.4l-5.8,9.1h53.4L117.5,183.8z M35.9,89.9L10.5,73.8L0,67.2
+		v55.2l9.9-6.3l25.8-16.3l7.9-5L35.9,89.9z M72.3,0l5.4,8.5L94,34.3l5,7.9l4.9-7.7l16.1-25.4l5.8-9.1H72.3z M192.3,123.4l-7.7-4.9
+		l-25.4-16.1l-7.7-4.9l7.9-5l25.8-16.3l7.1-4.5V123.4z"/>
+</g>
+</svg>

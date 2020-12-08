@@ -1,0 +1,60 @@
+Abkuerzung,TalentName,Probe1,Probe2,Probe3
+TAL_1,Fliegen,MU,IN,GE
+TAL_2,Gaukelei,MU,CH,FF
+TAL_3,Klettern,MU,GE,KK
+TAL_4,Körperbeherrschung,GE,GE,KO
+TAL_5,Kraftakt,KO,KK,KK
+TAL_6,Reiten,CH,GE,KK
+TAL_7,Schwimmen,GE,KO,KK
+TAL_8,Selbstbeherrschung,MU,MU,KO
+TAL_9,Singen,KL,CH,KO
+TAL_10,Sinnesschärfe,KL,IN,IN
+TAL_11,Tanzen,KL,CH,GE
+TAL_12,Taschendiebstahl,MU,FF,GE
+TAL_13,Verbergen,MU,IN,GE
+TAL_14,Zechen,KL,KO,KK
+TAL_15,Überzeugen,MU,KL,CH
+TAL_16,Betören,MU,CH,CH
+TAL_17,Einschüchtern,MU,IN,CH
+TAL_18,Etikette,KL,IN,CH
+TAL_19,Gassenwissen,KL,IN,CH
+TAL_20,Menschenkenntnis,KL,IN,CH
+TAL_21,Überreden,MU,IN,CH
+TAL_22,Verkleiden,IN,CH,GE
+TAL_23,Willenskraft,MU,IN,CH
+TAL_24,Fährtensuchen,MU,IN,GE
+TAL_25,Fesseln,KL,FF,KK
+TAL_26,Fischen & Angeln,FF,GE,KO
+TAL_27,Orientierung,KL,IN,IN
+TAL_28,Pflanzenkunde,KL,FF,KO
+TAL_29,Tierkunde,MU,MU,CH
+TAL_30,Wildnisleben,MU,GE,KO
+TAL_31,Brett- & Glücksspiel,KL,KL,IN
+TAL_32,Geographie,KL,KL,IN
+TAL_33,Geschichtswissen,KL,KL,IN
+TAL_34,Götter & Kulte,KL,KL,IN
+TAL_35,Kriegskunst,MU,KL,IN
+TAL_36,Magiekunde,KL,KL,IN
+TAL_37,Mechanik,KL,KL,FF
+TAL_38,Rechnen,KL,KL,IN
+TAL_39,Rechtskunde,KL,KL,IN
+TAL_40,Sagen & Legenden,KL,KL,IN
+TAL_41,Sphärenkunde,KL,KL,IN
+TAL_42,Sternkunde,KL,KL,IN
+TAL_43,Alchimie,MU,KL,FF
+TAL_44,Boote & Schiffe,FF,GE,KK
+TAL_45,Fahrzeuge,CH,FF,KO
+TAL_46,Handel,KL,IN,CH
+TAL_47,Heilkunde Gift,MU,KL,IN
+TAL_48,Heilkunde Krankh.,MU,IN,KO
+TAL_49,Heilkunde Seele,IN,CH,KO
+TAL_50,Heilkunde Wunden,KL,FF,FF
+TAL_51,Holzbearbeitung,FF,GE,KK
+TAL_52,Lebensmittelbea.,IN,FF,FF
+TAL_53,Lederbearbeitung,FF,GE,KO
+TAL_54,Malen & Zeichnen,IN,FF,FF
+TAL_55,Metallbearbeitung,FF,KO,KK
+TAL_56,Musizieren,CH,FF,KO
+TAL_57,Schlösserknacken,IN,FF,FF
+TAL_58,Steinbearbeitung,FF,FF,KK
+TAL_59,Stoffbearbeitung,KL,FF,FF
