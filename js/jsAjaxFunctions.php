@@ -163,7 +163,7 @@ pingChar(1);
 	{
 		searchForActiveUsers();
 		// console.log('activeUsersRefresh');
-    	setTimeout(arguments.callee, 2000); // repeat 
+    	setTimeout(arguments.callee, 20000); // repeat 
 	})();
    }, 500); //after x ms loading time
 
