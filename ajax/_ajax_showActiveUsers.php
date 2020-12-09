@@ -1,6 +1,4 @@
 <?php
-error_reporting(E_ALL);
-ini_set("display_errors", 1);
 require_once('../functions.php');
 		
 
@@ -34,12 +32,15 @@ echo '<div class="spielerWrapper">';
 			
 		else 
 		{
-			// print_r($row['userid']); 
+			//get User Image or send replacement
 			$userimage = 'src/'.$group_id.'/'.$row['userid'].'.jpg';
 			$userimagenoCache = $userimage.$rand;						
-			if(!is_file('../src/'.$group_id.'/'.$row['userid'].'.jpg'))
-			{			
-				$userimagenoCache = '';
+			if(is_file('../src/'.$group_id.'/'.$row['userid'].'.jpg') && filesize('../src/'.$group_id.'/'.$row['userid'].'.jpg') > 100)
+			{
+				$userimagenoCache = 'src/'.$group_id.'/'.$row['userid'].'.jpg';
+			}
+			else {
+				$userimagenoCache = 'img/placeholder.jpg';
 			}
 
 		}

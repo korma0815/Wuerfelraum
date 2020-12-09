@@ -1,22 +1,24 @@
 <?php
 //PDO Database connection
-$pdo = new PDO('mysql:host=.your-server.de;dbname=', '', '');
-$GLOBALS['saonCookie'] = "";
+$pdo = new PDO('mysql:localhost;dbname=', 'root', ''); // replace with your db
+$GLOBALS['saonCookie'] = ""; //replace with Saon Cookie
 $GLOBALS['PDO'] = $pdo ;
+// $domainName = 'https://www.wuerfelraum.de/
 // $domainName = 'https://www.wuerfelraum.de/nightly/';
 $domainName = "/wuerfelraum/"; // for local tests
+include_once('private/secrets.php');
 
-
-//Für den Chat und den GM_mode 
-function zeitangabe($DB_timestamp) {
+//For chat and GM Mode
+function zeitangabe($DB_timestamp) 
+{
 	$now = time();
 	if($now - $DB_timestamp < 60)
 	{
 		return '<span class="green">Jetzt</span>';
 	}
-	elseif($now - $DB_timestamp >= 60 && $now - $DB_timestamp < 3600)
+	elseif($now - $DB_timestamp >= 60 && $now - $DB_timestamp < 3600) //Minuten
 	{
-		$zeitDifferenz = floor(($now - $DB_timestamp)/60);		
+		$zeitDifferenz = floor(($now - $DB_timestamp)/60);		//Minuten
 		return ''.$zeitDifferenz.' Min';
 	}
 	elseif($now - $DB_timestamp >= 3600 && $now - $DB_timestamp < 86400)
@@ -32,7 +34,7 @@ function zeitangabe($DB_timestamp) {
 }
 
 function checkCookies(){
-	//RAndom Userid erstellen
+	//RAndom Userid 
 	$hashWert = microtime().rand(0,5000);
 	$hashWert = hash('adler32',$hashWert);	
 	
@@ -60,13 +62,6 @@ function charNameShorten($string){
 	}
 }
 
-// simpleDBSelect('text', 'group_id', '181');
-// function simpleDBSelect($what, $where, $is, $limit = 1)
-// {
-// 	$stmt = $GLOBALS['PDO']->prepare("SELECT '?' FROM `dsa_chat` WHERE '?' = '?'");
-// 	$stmt->execute([$what, $where, $is]); 
-// 	$result = $stmt->fetch();    
-// 	print_r($result);
-// }
+
 
 ?>
