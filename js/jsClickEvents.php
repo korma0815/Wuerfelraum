@@ -88,23 +88,7 @@ $(function ()
 	});
 });
 
-//possess Character
-$( "body" ).on( "click", "div.option.possess", function() {	
-	var possessedChar = $( "body" ).find(`div.spieler.selected`).attr('userid');
-	console.log(possessedChar);
-	document.cookie = "tempChar="+possessedChar+"; expires=Thu, 18 Dec 2072 12:00:00 UTC";
-	location.reload();
-});
 
-//set character to selected and keep it selected after reload
-$( "body" ).on( "click", "div.spieler", function() {	
-	$( "body" ).find(`div.spieler`).removeClass('selected');
-	$().addClass('selected');
-	userIDSelected = $(this).attr('userid');
-	$('div.activeUsers').attr('select',userIDSelected);
-	addClassToSelectedPlayer();
-
-});
 
 function addClassToSelectedPlayer()
 {
@@ -190,8 +174,7 @@ $(document).on('click', 'li.showTab',function(event)
 		document.cookie = "gmMode=0; expires=Thu, 18 Dec 2072 12:00:00 UTC";
 		document.cookie = "tempChar=0; expires=Thu, 18 Dec 2000 12:00:00 UTC";
 		// console.log('Gm Mode off');
-		location.reload();
-	
+		location.reload();	
 	  }
    });
    
@@ -204,17 +187,24 @@ $(document).on('click', 'li.showTab',function(event)
 		 $('.GM_mode').val(userID);
 		 $('#iniStart').removeClass('iniStart');
 	 }
+
 	//Lösche Search Box und schließe alle offenen Talente
 	$(document).on('keydown', function(event) 
 	{
        if (event.key == "Escape") {
+			
 			$("#talents li").hide(200);
+
 			$("h2.tal_header").removeClass('active');
 			$('#myInput').val("");
-
 			$( "body" ).find(`div.spieler`).removeClass('selected');
+			$(".spieler").removeClass('secondCircle');
+			$('div.circle').removeClass('active');		
 			$( "body" ).find(`div.activeUsers`).attr('select', "");
-	
+
+			// $('.sidebarTab.roll').addClass('active');	
+			// $('li.showTab[name=roll]').addClass('active');	
+			// $('.sidebarTab.roll').show();	
 			userIDSelected = "";
        }
 	});
@@ -238,4 +228,70 @@ $(document).on('click', 'li.showTab',function(event)
 	else { // firefox browsers requires this because of some stupid caching issue
 		$('.GM_mode').val('');
 	}
+
+
+//possess Character
+$(document).on( "click", "div.possess", function() {	
+	var possessedChar = $( "body" ).find(`div.spieler.selected`).attr('userid');
+	console.log(possessedChar);
+	document.cookie = "tempChar="+possessedChar+"; expires=Thu, 18 Dec 2072 12:00:00 UTC";
+	location.reload();
+});
+
+
+
+	//set character to selected 
+	$(document).on( "click", "div.spieler .avatar", function() {
+		if(!$(this).hasClass('selected')){
+			$('.spielerWrapper div').removeClass('selected');
+			$('.spielerWrapper div').removeClass('active');	
+			$('.spielerWrapper div').removeClass('selected');	
+			$("div.spieler").removeClass('secondCircle');
+
+			userIDSelected = $(this).attr('userid');
+			
+			$('div.activeUsers').attr('select',userIDSelected);
+			addClassToSelectedPlayer();
+			console.log('selecting');	
+			$('.spieler.selected .circle.target').click();
+		}
+
+		//deselect everything
+		else{
+			$('.spielerWrapper div').removeClass('active');	
+			$('.spieler').removeClass('secondCircle');	
+			$('.spielerWrapper div').removeClass('selected');	
+		}
+
+	});
+
+
+//activate second row
+$(document).on('click', '.circle.main',function(event) 
+	{
+		$(this).addClass('active');
+		var subCircles = $(this).attr('target');
+		$('.spieler.selected .circle').removeClass('active');
+		$('.spieler.selected .circle.'+subCircles).addClass('active');
+		if($(this).hasClass('secondCircle')){
+			$('.spieler.selected').addClass('secondCircle');
+		}
+		else {
+			$('.spieler.selected').removeClass('secondCircle');
+		}
+		
+	});	
+
+		//deactivate second row
+		$(document).on('click', '.circle.main.active',function(event) 
+		{
+			$(this).removeClass('active');
+			var subCircles = $(this).attr('target');
+			$('.spieler.selected .circle').removeClass('active');
+			$('.spieler.selected .circle.'+subCircles).removeClass('active');
+			$('.spieler').removeClass('secondCircle');
+
+		});	
+
+
 </script>

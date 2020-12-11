@@ -439,7 +439,10 @@ form.gruppeErstellen label {
 	/* border: 2px solid #826a3e;
 	*/
 }
-table .grey,.misslungen,.rollMinusText,.pointsLeft {
+table .grey,
+.failed,
+.rollMinusText,
+.pointsLeft {
 	color: grey;
 	margin-left: 7px;
 	font-size: 12px;
@@ -447,7 +450,7 @@ table .grey,.misslungen,.rollMinusText,.pointsLeft {
 .vline {
 	color:grey;
 }
-.rollMinusText,.misslungen {
+.rollMinusText,.failed {
 	margin-left: 2px;
 }
 th.Zeit {
@@ -828,29 +831,30 @@ div.ajax-file-upload-container,div#fileuploader *,.iniStart,.iniStart.show {
 	*/
 }
 .activeUsers {
-	min-height: 85px;
+	min-height: 105px;
 }
 .spielerWrapper {
 	padding-left: 12px;
 	padding-bottom: 0;
 }
 .spieler {
-	float: left;
-	width: 80px;
-	position:relative;
-	margin-right: 12px;
-	text-align: center;
-	margin: auto;
+		float: left;
+		width: 130px;
+		position: relative;
+		margin-right: 12px;
+		text-align: center;
+		margin: auto;
+		height: 105px;
+
 }
 .spieler .avatar-wrapper {
-	float: left;
-	width: 25px;
-	height: 25px;
-	padding: 4px;
-	border: 0px solid #826a3e;
-	border-radius: 100%;
-	margin-right: 0px;
-	margin-left: 23px;
+    float: none;
+    width: 40px;
+    height: 40px;
+    display: block;
+    border: 0px solid #826a3e;
+    border-radius: 100%;
+    margin: auto;
 }
 .spieler .avatar-wrapper:after {
 	display:none;
@@ -861,6 +865,18 @@ div.ajax-file-upload-container,div#fileuploader *,.iniStart,.iniStart.show {
 	text-align: center;
 	font-size: 12px;
 	padding-top: 5px;
+	transition:all .25s ease;
+}
+
+.spieler.selected .spielerName{
+	padding-top: 23px;
+   
+    font-weight: bolder;
+}
+.spieler.selected.secondCircle .spielerName{
+
+	padding-top: 47px;
+    font-weight: bolder;
 }
 .avatar img {
 	/* width:25px;
@@ -962,7 +978,7 @@ form#attackFields select *{
 	padding:2px;
 }
 div.spieler.selected .avatar {
-	box-shadow: 0 0 15px #ffd07b;
+	/* box-shadow: inset 0 0 5px #ffd07b; */
 }
 div.userOptionsWrapper {
 	display:none;
@@ -970,6 +986,17 @@ div.userOptionsWrapper {
 div.spieler.selected div.userOptionsWrapper {
 	display:block;
 }
+span.attacks {
+	display: inline-block;
+	height: 13px;
+	width: 21px;
+	padding: 0 5px;
+	content: "";
+	background: url(../img/schwert.svg);
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
 div.userOptionsWrapper {
 	position: absolute;
 	right: 0;
@@ -982,14 +1009,17 @@ div.option {
 	float: left;
 	margin-right: 5px;
 }
-div.option.possess {
+.circle.GM {
 	display:none;
 }
-body.GM div.option.possess {
-	background: url(../img/possess.svg);
+
+body.GM .circle.GM {
 	display:block;
-	width: 20px;
-	height: 20px;
+}
+
+
+body.GM .GM.possess {
+	background: url(../img/possess.svg);
 	cursor: pointer;
 }
 div.option.target{
@@ -998,13 +1028,88 @@ div.option.target{
 div.option.target.spielleiter{
 	display:none;
 }
-span.attacks {
-	display: inline-block;
-	height: 13px;
-	width: 21px;
-	padding: 0 5px;
-	content: "";
-	background: url(../img/schwert.svg);
-	background-repeat: no-repeat;
-	background-position: center;
+
+
+
+.circle.status {
+	cursor: pointer;
+	background: url(../img/status.svg);
+}
+
+
+
+.circle {
+    font-size: 0;
+    width: 15px;
+	height: 15px;
+	transform:  scale(0);
+	background: url(../img/target.svg);
+	cursor: pointer;
+
+}
+
+.spieler.selected .circle.main {
+	transform:  scale(1);
+	opacity:.6;
+}
+
+.circle.active {
+	transform:  scale(1);
+}
+
+.spieler.selected .circle.main.active {
+	opacity:1;
+}
+.circle:hover {
+	width:17px;
+	height: 17px;
+	margin-left: -1px;
+	margin-top: -1px;
+}
+
+.selectionsWrapper {
+    position: absolute;
+    left: 57px;
+    top: 17px;
+}
+
+.spieler.selected.secondCircle .main.circle {
+
+	/* transform: scale(.8); */
+	opacity:.5;
+}
+
+.spieler.selected.secondCircle .main.circle.active {
+
+	/* transform: scale(1); */
+	opacity:1;
+	filter: drop-shadow(0px 0px 3px #826a3e);
+}
+
+.spieler:after {
+    border: 1px solid #38301891;
+    width: 83px;
+    height: 83px;
+    position: absolute;
+    content: "";
+    top: 50%;
+    border-radius: 100%;
+    left: 50%;
+    margin-top: -70px;
+    margin-left: -43px;
+    z-index: -1;
+	background: #826a3e36;
+	transform: scale(0);
+	transition: all .25s ease;
+
+}
+
+.spieler.selected:after {
+	transform: scale(1);
+}
+
+.spieler.selected.secondCircle:after {
+    border: 20px solid #252018;
+    margin-left: -62px;
+    margin-top: -90px;
 }

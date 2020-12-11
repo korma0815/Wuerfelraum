@@ -171,7 +171,7 @@ $str = '- id: LITURGY_1
 - id: LITURGY_10
   name: "Giftbann"
   effect: |
-    Der Giftbann neutralisiert ein Gift. Die maximale Giftstufe darf die QS nicht übersteigen, sonst wirkt die Liturgie nicht und gilt als misslungen.
+    Der Giftbann neutralisiert ein Gift. Die maximale Giftstufe darf die QS nicht übersteigen, sonst wirkt die Liturgie nicht und gilt als failed.
   castingTime: 4 Aktionen
   castingTimeShort: 4 Akt
   kpCost: 2 KaP pro Giftstufe
@@ -275,7 +275,7 @@ $str = '- id: LITURGY_1
 - id: LITURGY_16
   name: "Krankheitsbann"
   effect: |
-    Diese Liturgie heilt Krankheiten (die bisher erlittenen Auswirkungen werden nicht geheilt). Die maximale Krankheitsstufe darf die QS nicht übersteigen, sonst wirkt die Liturgie nicht und gilt als misslungen. Die Liturgie heilt auch alle Symptome der Krankheit, aber keine bis dahin entstandenen Schäden (LeP-Verlust, Narben usw.).
+    Diese Liturgie heilt Krankheiten (die bisher erlittenen Auswirkungen werden nicht geheilt). Die maximale Krankheitsstufe darf die QS nicht übersteigen, sonst wirkt die Liturgie nicht und gilt als failed. Die Liturgie heilt auch alle Symptome der Krankheit, aber keine bis dahin entstandenen Schäden (LeP-Verlust, Narben usw.).
   castingTime: 16 Aktionen
   castingTimeShort: 16 Akt
   kpCost: 2 KaP pro Krankheitsstufe
@@ -1176,7 +1176,7 @@ $str = '- id: LITURGY_1
   name: "Feuerwall"
   effect: |
     Um den Ingerimmgeweihten herum schießt eine kreisrunde und 3 Schritt hohe Wand aus Flammen aus dem Boden empor.<br>
-    Der Radius des eingeschlossenen Zirkels beträgt maximal QS/2 Schritt. Die Durchquerung der Wand erfordert eine gelungene Probe auf *Willenskraft (Bedrohungen standhalten)*, die um QS/2 erschwert ist. Dabei wird der Durchquerende von Flammen versengt, sodass jeder gelungene wie misslungene Durchquerungsversuch 2W6 SP verursacht. Entflammbare Ziele erleiden zusätzlich bei 1-3 auf 1W6 den Status *Brennend* auf kleiner Fläche.<br>
+    Der Radius des eingeschlossenen Zirkels beträgt maximal QS/2 Schritt. Die Durchquerung der Wand erfordert eine gelungene Probe auf *Willenskraft (Bedrohungen standhalten)*, die um QS/2 erschwert ist. Dabei wird der Durchquerende von Flammen versengt, sodass jeder gelungene wie failede Durchquerungsversuch 2W6 SP verursacht. Entflammbare Ziele erleiden zusätzlich bei 1-3 auf 1W6 den Status *Brennend* auf kleiner Fläche.<br>
     Dem Geweihten und beliebig vielen von ihm bestimmten Personen geschieht durch die Flammen nichts. Sie können die Flammenwand beliebig in beide Richtungen passieren.
   castingTime: 2 Aktionen
   castingTimeShort: 2 Akt
@@ -1620,7 +1620,7 @@ $str = '- id: LITURGY_1
 - id: LITURGY_91
   name: "Kleine Windhose"
   effect: |
-    Durch eine aufkommende kleine Windhose werden kleine Steine, Äste und andere lose Objekte der näheren Umgebung auf einen ausgewählten Feind geweht. Dieser erleidet dadurch 1W6+QS/2 TP, wenn ihm keine Probe auf Ausweichen gelingt. Unabhängig davon, ob die Probe gelungen oder misslungen ist, kann der Gegner sich bis zum Ende der nächsten KR aufgrund des Windes nur mit einer GS von 1 fortbewegen.
+    Durch eine aufkommende kleine Windhose werden kleine Steine, Äste und andere lose Objekte der näheren Umgebung auf einen ausgewählten Feind geweht. Dieser erleidet dadurch 1W6+QS/2 TP, wenn ihm keine Probe auf Ausweichen gelingt. Unabhängig davon, ob die Probe gelungen oder failed ist, kann der Gegner sich bis zum Ende der nächsten KR aufgrund des Windes nur mit einer GS von 1 fortbewegen.
   castingTime: 1 Aktion
   castingTimeShort: 1 Akt
   kpCost: 8 KaP
@@ -2208,7 +2208,7 @@ $str = '- id: LITURGY_1
 - id: LITURGY_124
   name: "Windhose"
   effect: |
-    Durch eine aufkommende Windhose werden kleine Steine, Äste und andere lose Objekte der näheren Umgebung auf einen ausgewählten Feind geweht. Dieser erleidet dadurch 2W6+QS TP, wenn ihm keine Probe auf Ausweichen erschwert um 2 gelingt. Unabhängig davon, ob die Probe gelungen oder misslungen ist, kann der Gegner sich bis zum Ende der nächsten KR aufgrund des Windes nur mit einer GS von 1 fortbewegen.
+    Durch eine aufkommende Windhose werden kleine Steine, Äste und andere lose Objekte der näheren Umgebung auf einen ausgewählten Feind geweht. Dieser erleidet dadurch 2W6+QS TP, wenn ihm keine Probe auf Ausweichen erschwert um 2 gelingt. Unabhängig davon, ob die Probe gelungen oder failed ist, kann der Gegner sich bis zum Ende der nächsten KR aufgrund des Windes nur mit einer GS von 1 fortbewegen.
   castingTime: 2 Aktionen
   castingTimeShort: 2 Akt
   kpCost: 8 KaP

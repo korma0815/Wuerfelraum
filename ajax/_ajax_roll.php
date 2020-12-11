@@ -319,7 +319,7 @@ elseif($roll_task == '_talentprobe')
 	{	
 		if($talentPoints < 0) 
 		{ 
-			 $returnWert .= '</td><td>Probe misslungen <span class="misslungen">'.$talentPoints.'</span></td>';
+			 $returnWert .= '</td><td>Probe misslungen <span class="failed">'.$talentPoints.'</span></td>';
 			// echo $talentPoints;
 		}
 		else 
@@ -328,7 +328,7 @@ elseif($roll_task == '_talentprobe')
 				 $returnWert .= "</td><td><span class=\"green\">Kritischer Erfolg !</span> (+$talentPoints)&nbsp;&nbsp;QS: ";
 			}
 			else {
-				 $returnWert .= "</td><td>Probe erfolgreich <span class=\"misslungen\">+$talentPoints&nbsp;&nbsp;</span> QS: ";
+				 $returnWert .= "</td><td>Probe erfolgreich <span class=\"failed\">+$talentPoints&nbsp;&nbsp;</span> QS: ";
 			}
 			
 
@@ -443,7 +443,7 @@ elseif($roll_task == '_spell') {
 	
 	if($failures < 2){	
 		if($talentPoints < 0) {
-			 $returnWert .= '</td><td>Probe misslungen <span class="misslungen">('.$talentPoints.')</span></td>';
+			 $returnWert .= '</td><td>Probe misslungen <span class="failed">('.$talentPoints.')</span></td>';
 			// echo $talentPoints;
 		}
 		else {
@@ -451,7 +451,7 @@ elseif($roll_task == '_spell') {
 				 $returnWert .= "</td><td><span class=\"green\">Kritischer Erfolg !</span> (+$talentPoints)&nbsp;&nbsp;QS: ";
 			}
 			else {
-				 $returnWert .= "</td><td>Probe erfolgreich <span class=\"misslungen\">(+$talentPoints) </span>&nbsp;&nbsp;QS: ";
+				 $returnWert .= "</td><td>Probe erfolgreich <span class=\"failed\">(+$talentPoints) </span>&nbsp;&nbsp;QS: ";
 			}
 			
 			if($talentPoints > 0){

@@ -195,7 +195,6 @@ pingChar(1);
         console.log(data);
         console.log(xhr);
         console.log(pd);
-
         document.cookie = "char="+files[0]+"; expires=Thu, 18 Dec 2072 12:00:00 UTC";
         // document.cookie = "userId="+files[0]+"; expires=Thu, 18 Dec 2072 12:00:00 UTC";
         location.reload();

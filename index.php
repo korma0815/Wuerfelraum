@@ -11,7 +11,7 @@ $Dice = new DiceChamber();
 // $Ini = new Initiative();
 $Saon = new DiceChamberSaon(); // will soon replace Dicescreen
 
-$group = $Dice->checkGroup($pdo);// Is there a group?
+$group = $Dice->checkGroup($pdo); // Is there a group?
 $AdminMode = new Overwatch();
 
 $char = ($Dice -> jsonFile()); // will be replaced with Saon char
@@ -25,9 +25,9 @@ if(isset($GLOBALS['userID']) && isset($_GET['group'])){
 		$saonChar = $Saon->getSaonChar($pdo, $GLOBALS['userID']);
 	}
 	
-	// print_r($saonChar);;
+// print_r($saonChar);;
 }
-elseif(isset($_GET['group'])) { // Fallback to Alrik
+	elseif(isset($_GET['group'])) { // Fallback to Alrik
 	$saonChar = $Saon->getSaonChar($pdo, '3fcf04eb'); //alrik
 }
 
@@ -41,6 +41,7 @@ echo '</pre>';
 // 	die('Dein Heldenbogen ist nicht mit der Seite kompatibel, oder der Server hat gerade Probleme.<br>
 // 	Falls diese Fehler-Seite weiterhin auftaucht, musst du eventuell deine Cookies für diese Webseite löschen. <a href="'.$domainName.'/pages/clean.php?group='.$_GET['group'].'">Reparatur-Versuch starten</a>');
 // }
+
 ?>
 <!DOCTYPE html>
 
@@ -61,7 +62,8 @@ echo '</pre>';
 		<?php if(!$group){echo '<title>DSA Würfelraum</title>';} else {echo '<title>',$group,' - Würfelraum</title>';} ?>
 		<style>
 	tr._<?php echo $GLOBALS['userID']; ?> {background: #ffd70026;}  
-	</style>
+
+</style>
 </head>
 <body>
 <script>
@@ -105,8 +107,8 @@ echo '</pre>';
 			echo '</div>';		
 			$Dice->gm_Mode();
 			
-		echo '</div>'; // Header End
-	
+		echo '</div>'; // Header End	
+
 	echo '<div class="sidebar-right">';
 	echo '<div class="activeUsers"></div>';
 	if(!empty($saonChar['inventory'])){$Saon->createDmgForm($saonChar['specialAbilities'], $groupid, $saonChar['name'], $saonChar['inventory']);}
@@ -177,8 +179,6 @@ echo '</pre>';
 	//import Javascript files
 	require_once('./js/jsAjaxFunctions.php');
 	require_once('./js/jsClickEvents.php');
-
-
 }
 
 //Subpages
