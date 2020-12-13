@@ -61,7 +61,6 @@ class DiceChamberSaon extends DiceChamber
         if(isset($sonid[0])) //char is found
         {
             $sonid = $sonid[0];
-
             if(strlen($sonid) > 5) //check if it's usable
             {
                 if($json = file_get_contents('http://www.saon-beta.xyz/api/characters/'.$sonid))     //success            
@@ -514,74 +513,175 @@ class DiceChamberSaon extends DiceChamber
         echo '</table>';
     }
 
-        //Show hero Sheet
-        public function showHeroSheet($hero){
+    //Show hero Sheet
+    public function showHeroSheet($hero){
 
-            echo '<table class="table_2third"';
-            echo '
-            <tr>
-                 <th>Heldenbogen</th>
-            </tr>
-            <tr>
-                <td>Name: </td><td>',$hero["name"],'</td>
-            </tr>
-            <tr>
-                <td>Spezies: </td><td>',$hero["race"],'</td>
-            </tr>
-            <tr>
-                <td>Kultur: </td><td>',$hero["culture"],'</td>
-            </tr>
-            <tr>
-                <td>Beruf: </td><td>',$hero["profession"],'</td>
-            </tr>
+        echo '<table class="table_2third"';
+        echo '
+        <tr>
+                <th>Heldenbogen</th>
+        </tr>
+        <tr>
+            <td>Name: </td><td>',$hero["name"],'</td>
+        </tr>
+        <tr>
+            <td>Spezies: </td><td>',$hero["race"],'</td>
+        </tr>
+        <tr>
+            <td>Kultur: </td><td>',$hero["culture"],'</td>
+        </tr>
+        <tr>
+            <td>Beruf: </td><td>',$hero["profession"],'</td>
+        </tr>
 
-            <tr>
-                <td>Erfahrung: </td><td>',$hero["exp"],'</td>
-            </tr>
-            
-            ';
+        <tr>
+            <td>Erfahrung: </td><td>',$hero["exp"],'</td>
+        </tr>
+        
+        ';
 
-            // echo '</table>';    
-        }
+        // echo '</table>';    
+    }
 
-        //Show special abilities
-        public function showSA($sa){
-            echo '<table class="table_2third"';            
-                echo '<tr><th>Sonderfertigkeiten</th></tr>';
-                foreach($sa as $specialAbility){
-                    if($specialAbility['id'] == 'SA_27' OR $specialAbility['id'] == 'SA_29'  ){ // language 
-                        continue;
-                    }
-                    echo '<tr>';
-                        echo '<td>';   
-                            echo $specialAbility['name'];
-                            if(!empty($specialAbility['tier'])){ echo ' ',self::numberToRomanRepresentation($specialAbility['tier']);}
-                        echo '</td>';   
-                    echo '</tr>';
-
+    //Show special abilities
+    public function showSA($sa){
+        echo '<table class="table_2third"';            
+            echo '<tr><th>Sonderfertigkeiten</th></tr>';
+            foreach($sa as $specialAbility){
+                if($specialAbility['id'] == 'SA_27' OR $specialAbility['id'] == 'SA_29'  ){ // language 
+                    continue;
                 }
+                echo '<tr>';
+                    echo '<td>';   
+                        echo $specialAbility['name'];
+                        if(!empty($specialAbility['tier'])){ echo ' ',self::numberToRomanRepresentation($specialAbility['tier']);}
+                    echo '</td>';   
+                echo '</tr>';
 
-            // echo '</table>';
+            }
+
+        // echo '</table>';
 
 
+    }
+
+
+
+
+
+
+    public function createDmgForm($sa, $group_id, $character, $inventory){
+        //Prepare Weapons
+        $weapons = array();
+        foreach($inventory as $item){
+            if(!empty($item['combatTechnique'])){
+                $weapons[] = $item;
+            }
         }
-        public function createDmgForm($sa, $group_id, $character, $inventory){
+       
+        //add first drop down option
+        array_unshift($weapons ,  array('at' => 0, 'pa' => 0, 'name' => '-Waffe')); 
+
+        //Prepare maneuvres and passives
+        $maneuvres = array(
+            array('gr' => 3, 'penality' => 0, 'id' => 'base', 'attackValue' => '0', 'name' => 'Basismanöver', 'subgr' => 2),  
+            array('gr' => 3, 'penality' => 0, 'id' => 'special', 'attackValue' => '0', 'name' => 'Spezialmanöver', 'subgr' => 3),    
+            array('gr' => 3, 'penality' => 0, 'id' => 'passive', 'attackValue' => '0', 'name' => 'Passiv', 'subgr' => 1) 
+        );        
+        // print_r($);
+       
+        //Start Form
+        echo '<form id="attackFields">'; 
+
+        //add Weapons
+            echo '<select title="Waffe" id="weapon" name="weapon">';
+                foreach($weapons as  $weapon)
+                {
+                        echo '<option paradeValue="',$weapon['combatTechnique']['PA'],'" attackValue="',$weapon['combatTechnique']['AT'],'" value="',$weapon['name'],'">',$weapon['name'],'</option>'; 
+                }
+            echo '</select>'; 
+
+            foreach($maneuvres as $maneuvre){            
+                echo '
+                <select title="',$maneuvre['name'],'" id="',$maneuvre['id'],'" name="',$maneuvre['name'],'">';
+
+                echo '<option penalty="0"  name="',$maneuvre['id'],'" >-',$maneuvre['name'],'</option>';
+
+                foreach($sa as $ability)
+                {
+
+                    if(!empty($ability['subgr']) && $ability['subgr'] == $maneuvre['subgr']){
+                        // echo 'found: ', $ability['name'];
+                            $penalties = array(0 => array(0 => 0));
+                    
+                        //convert penality string to actual numbers
+                        if(!empty($ability['penality'])){
+                            $penalties = self::getIntegers($ability['penality']);        
+                        } 
+
+                        if(count($penalties)>1){$k = 1;} else {$k = 0;}
+                        
+                        //Get current tier as loop counter
+                        if(!empty($ability['tier'])) {
+                            $amountOfLoops = $ability['tier'];
+                        }
+                        else {
+                            $amountOfLoops = 1; 
+                        }
+                        
+                        for($l = 0; $l < $amountOfLoops; $l++){                            
+                            echo '<option penalty="',$penalties[$l][0],'" value="',$ability['name'],' ',self::numberToRomanRepresentation($k),'">',$ability['name'],' ',self::numberToRomanRepresentation($k),'</option>'; 
+                            $k++;                         
+                        }
+                    }
+                    else {
+                        // echo 'Subgrp noch  found: ', $ability['subgr'];
+                    
+                    }
+                    
+            }
+            echo '</select>';    
+            }
+
+            echo '&nbsp;&nbsp;&nbsp;<i class="far fa-edit"></i> <input class="grey" title="Korrektur" name="edit" type="text" id="edit" value="0" >&nbsp;&nbsp;&nbsp;';
+            echo '&nbsp;&nbsp;&nbsp;At: <input class="grey" name="attackValue" title="Berechneter Atackwert" type="number" id="attCalcResult" value="0" readonly>&nbsp;&nbsp;&nbsp;';
+            echo '<input type="submit" name="save" value="Angriff">';      
+            echo '<input type="hidden" name="roll_task" value="_attackConcatenated">';   
+            echo '<input type="hidden" name="group_id" value="',$group_id,'"></input>';   
+            echo '<input type="hidden" name="character" value="',$character,'"></input>';   
+            echo '<input type="hidden" class="GM_mode" name="gmMode" value="0"></input>';   
+        echo '</form>';
+
+    }
+
+
+
+
+
+        public function createDmgForm_alt($sa, $group_id, $character, $inventory){
+            
             $weapons = array();
             foreach($inventory as $item){
                 if(!empty($item['combatTechnique'])){
                     $weapons[] = $item;
                 }
+            
+
+
+
             }
 
-            // print_r($weapons);
             $chooseWeapon = array('at' => 0, 'pa' => 0, 'name' => '-Waffe');
-            $chooseBase = array('gr' => 3, 'penality' => 0, 'name' => '-Basismanöver');    
-            $chooseSpecial = array('gr' => 3, 'penality' => 0, 'name' => '-Spezialmanöver');    
+            $chooseBase = array('gr' => 3, 'penality' => 0, 'name' => '-Basismanöver', 'subgr' => 2);    
+            $chooseSpecial = array('gr' => 3, 'penality' => 0, 'name' => '-Spezialmanöver', 'subgr' => 3);    
+            $choosePassive = array('gr' => 3, 'penality' => 0, 'name' => '-Passiv', 'subgr' => 1);    
             
             $special = $sa;
+            $passive = $sa;
             array_unshift($weapons , $chooseWeapon);
             array_unshift($sa , $chooseBase);
             array_unshift($special , $chooseSpecial);
+            array_unshift($passive , $choosePassive);
             echo '<pre>';
             // array_unshift($sa , '-Waffe-');
             // print_r($sa);
@@ -596,20 +696,52 @@ class DiceChamberSaon extends DiceChamber
                     }
                 echo '</select>';  
 
-            //base maneuvre  
+                //base maneuvre  
                 echo '
                  <select title="Basismanöver" id="base" name="base">';
                     foreach($sa as  $specialAbility)
                     {
                         //only Gr3 are combat skills
-                        if($specialAbility['gr'] != 3){continue;}
-                        $penalties = array(0 => array(0 => 0));
+                        if($specialAbility['subgr'] == 2){
+                                $penalties = array(0 => array(0 => 0));
+                        
+                            //convert penality string to actual numbers
+                            if(!empty($specialAbility['penality'])){
+                                $penalties = self::getIntegers($specialAbility['penality']);        
+                            } 
+
+                            if(count($penalties)>1){$k = 1;} else {$k = 0;}
+                            
+                            //Get current tier as loop counter
+                            if(!empty($specialAbility['tier'])) {
+                                $amountOfLoops = $specialAbility['tier'];
+                            }
+                            else {
+                                $amountOfLoops = 1; 
+                            }
+                            
+                            for($l = 0; $l < $amountOfLoops; $l++){                            
+                                echo '<option penalty="',$penalties[$l][0],'" value="',$specialAbility['name'],' ',self::numberToRomanRepresentation($k),'">',$specialAbility['name'],' ',self::numberToRomanRepresentation($k),'</option>'; 
+                                $k++;                         
+                            }
+                        }
                        
+                    }
+                echo '</select>';  
+                //Special maneuvre    
+                echo '
+                <select title="Spezialmanöver" id="special" name="special">';
+                foreach($special as  $specialAbility)
+                {
+                    //only Gr3 are combat skills
+                    if(!empty($specialAbility['subgr']) && $specialAbility['subgr'] == 3){
+                        $penalties = array(0 => array(0 => 0));
+                   
                         //convert penality string to actual numbers
                         if(!empty($specialAbility['penality'])){
                             $penalties = self::getIntegers($specialAbility['penality']);        
                         } 
-
+    
                         if(count($penalties)>1){$k = 1;} else {$k = 0;}
                         
                         //Get current tier as loop counter
@@ -625,37 +757,45 @@ class DiceChamberSaon extends DiceChamber
                             $k++;                         
                         }
                     }
-                echo '</select>';  
-                //Special maneuvre    
-                echo '
-                <select title="Spezialmanöver" id="special" name="special">';
-                foreach($special as  $specialAbility)
-                {
-                    //only Gr3 are combat skills
-                    if($specialAbility['gr'] != 3){continue;}
-                    $penalties = array(0 => array(0 => 0));
-                   
-                    //convert penality string to actual numbers
-                    if(!empty($specialAbility['penality'])){
-                        $penalties = self::getIntegers($specialAbility['penality']);        
-                    } 
 
-                    if(count($penalties)>1){$k = 1;} else {$k = 0;}
-                    
-                    //Get current tier as loop counter
-                    if(!empty($specialAbility['tier'])) {
-                        $amountOfLoops = $specialAbility['tier'];
-                    }
-                    else {
-                        $amountOfLoops = 1; 
-                    }
-                    
-                    for($l = 0; $l < $amountOfLoops; $l++){                            
-                        echo '<option penalty="',$penalties[$l][0],'" value="',$specialAbility['name'],' ',self::numberToRomanRepresentation($k),'">',$specialAbility['name'],' ',self::numberToRomanRepresentation($k),'</option>'; 
-                        $k++;                         
-                    }
                 }
                 echo '</select>';  
+                print_r($passive);
+                //Passive maneuvre    
+                echo '
+                <select title="Passiv" id="passive" name="passive">';
+                foreach($passive as  $specialAbility)
+                {
+                   
+                    //only subgr 1 are passives
+                    if(!empty($specialAbility['subgr']) && $specialAbility['subgr'] == 1){
+                        
+                        $penalties = array(0 => array(0 => 0));
+                   
+                        //convert penality string to actual numbers
+                        if(!empty($specialAbility['penality'])){
+                            $penalties = self::getIntegers($specialAbility['penality']);        
+                        } 
+    
+                        if(count($penalties)>1){$k = 1;} else {$k = 0;}
+                        
+                        //Get current tier as loop counter
+                        if(!empty($specialAbility['tier'])) {
+                            $amountOfLoops = $specialAbility['tier'];
+                        }
+                        else {
+                            $amountOfLoops = 1; 
+                        }
+                        
+                        for($l = 0; $l < $amountOfLoops; $l++){                            
+                            echo '<option penalty="',$penalties[$l][0],'" value="',$specialAbility['name'],' ',self::numberToRomanRepresentation($k),'">',$specialAbility['name'],' ',self::numberToRomanRepresentation($k),'</option>'; 
+                            $k++;                         
+                        }
+                    }
+
+                }
+                echo '</select>'; 
+
                 echo '&nbsp;&nbsp;&nbsp;<i class="far fa-edit"></i> <input class="grey" title="Korrektur" name="edit" type="text" id="edit" value="0" >&nbsp;&nbsp;&nbsp;';
                 echo '&nbsp;&nbsp;&nbsp;At: <input class="grey" name="attackValue" title="Berechneter Atackwert" type="number" id="attCalcResult" value="0" readonly>&nbsp;&nbsp;&nbsp;';
                 echo '<input type="submit" name="save" value="Angriff">';      

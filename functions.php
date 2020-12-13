@@ -4,8 +4,8 @@ $pdo = new PDO('mysql:localhost;dbname=', 'root', ''); // replace with your db
 $GLOBALS['saonCookie'] = ""; //replace with Saon Cookie
 $GLOBALS['PDO'] = $pdo ;
 // $domainName = 'https://www.wuerfelraum.de/
-// $domainName = 'https://www.wuerfelraum.de/nightly/';
-$domainName = "/wuerfelraum/"; // for local tests
+$domainName = 'https://www.wuerfelraum.de/nightly/';
+// $domainName = "/wuerfelraum/"; // for local tests
 include_once('private/secrets.php');
 
 //For chat and GM Mode

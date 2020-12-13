@@ -127,15 +127,24 @@ $(document).on('click', 'li.showTab',function(event)
 		});		
 		
 	//calculate chance
-	$('select, input').change(function() 
+	$('#attackFields select, #attackFields input').change(function() 
 	{	
 		var weaponAt = $('#weapon option:selected').attr('attackvalue');
+		var weaponAt = parseInt(weaponAt);
+
+		console.log(weaponAt);
 		var penalty1 = $('#base option:selected').attr('penalty');
+		var penalty1 = parseInt(penalty1);
+		console.log(penalty1);
 		var penalty2 = $('#special option:selected').attr('penalty');
+		var penalty2 = parseInt(penalty2);
+		console.log(penalty2);
+
 		var edit = $('#edit').val();
 		edit = parseInt(edit);
 		console.log(edit);
 		var result = weaponAt;
+
 		$('input#attCalcResult').val(result-penalty1-penalty2+edit);
 	})
 		
